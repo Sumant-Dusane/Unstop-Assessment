@@ -1,0 +1,139 @@
+@import "../../../assets/styles/variables";
+
+.assessment-overview {
+  overflow: hidden;
+
+  .title {
+    margin-bottom: $gutter;
+  }
+
+  &__details {
+    display: grid;
+    grid-template-areas:
+        "first second"
+        "third third"
+        "fourth fourth";
+    grid-template-columns: 1fr 1fr;
+    border-radius: $border-radius-medium;
+    border: 1px solid $stroke;
+  }
+
+  .first {
+    grid-area: first;
+  }
+  .second {
+    border-left: 1px solid $stroke;
+    grid-area: second;
+  }
+  .third {
+    grid-area: third;
+    border-top: 1px solid $stroke;
+    border-bottom: 1px solid $stroke;
+  }
+  .fourth {
+    grid-area: fourth;
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    padding: $gutter10 $gutter20;
+    gap: $gutter;
+
+    &__desc {
+      display: flex;
+      align-items: center;
+
+      img {
+        width: 40px;
+        height: 40px;
+        object-fit: cover;
+        margin-right: $gutter10;
+      }
+    }
+
+    &-box {
+      display: grid;
+      align-items: center;
+      min-height: 40px;
+      gap: 0 $gutter1_2;
+      grid-template-areas: "value growth" "label label";
+
+      .value {
+        font-weight: $font-weight600;
+        grid-area: value;
+        font-size: $font-size-base;
+      }
+
+      .growth {
+        grid-area: growth;
+        font-size: $font-size-xs;
+        color: $green;
+      }
+
+      .label {
+        grid-area: label;
+        font-size: $font-size-xs;
+      }
+
+      &:first-of-type {
+        margin-right: $gutter10;
+      }
+
+      &:not(:first-of-type) {
+        border-left: 1px solid $stroke;
+        padding: 0 $gutter10;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 768px){
+  .assessment-overview {
+
+    &__details {
+      display: flex;
+      align-items: center;
+      &__desc {
+        img {
+          margin-right: $gutter20;
+        }
+      }
+    }
+
+    .third {
+      border-top: 0;
+      border-bottom: 0;
+    }
+
+    .info {
+      padding: $gutter $gutter20;
+
+      &__title {
+        font-weight: $font-weight600;
+      }
+
+      &__desc {
+        img {
+          margin-right: $gutter20;
+        }
+      }
+
+      &-box {
+        .value {
+          font-size: $font-size-sm;
+        }
+
+        &:not(:first-of-type) {
+          padding: 0 $gutter20;
+        }
+      }
+
+      &:not(:first-child) {
+        border-left: 1px solid $stroke;
+      }
+    }
+
+
+  }
+}

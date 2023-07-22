@@ -1,0 +1,31 @@
+<button class="btn hamburger" (click)="openSidebar()">
+  <img src="../../../assets/icons/hamburger.svg">
+</button>
+
+<div class="backdrop" *ngIf="isSidebarOpen" (click)="closeSidebar()"></div>
+<div class="sidebar" [ngClass]="{'show': isSidebarOpen}">
+  <div class="mweb-title">
+    Menu
+    <button class="btn btn-img btn-close" (click)="closeSidebar()"></button>
+  </div>
+  <button class="btn btn-img nav-link">
+    <img src="../../../assets/icons/dashboard.svg" alt="Dashboard">
+    Dashboard
+  </button>
+  <button class="btn btn-img nav-link active">
+    <img src="../../../assets/icons/assessment.svg" alt="Assessment">
+    Assessment
+  </button>
+  <button class="btn btn-img nav-link">
+    <img src="../../../assets/icons/quiz.svg" alt="My Library">
+    My Library
+  </button>
+  <div class="divider"></div>
+  <button class="btn btn-img nav-link">
+    <div class="chip">
+      Admin
+    </div>
+    <img src="../../../assets/icons/admin_meds.svg" alt="Round Status">
+    Round Status
+  </button>
+</div>

@@ -1,0 +1,109 @@
+@import "../../../assets/styles/variables";
+@import "../../../assets/styles/sudo";
+
+.hamburger {
+  @include element-position(absolute, 10px, unset, unset, 10px);
+}
+
+.sidebar {
+  @include element-position(fixed, 0, unset, 0, -100%);
+  padding: $gutter24;
+  height: 100vh;
+  z-index: 1000;
+  background-color: $white;
+  transition: $transition-long;
+
+  .mweb-title {
+    display: flex;
+    align-self: center;
+    justify-content: space-between;
+
+    .btn-close {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .nav-link {
+    cursor: pointer;
+    position: relative;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: $gutter1_2;
+    font-size: $font-size-xs;
+    padding: $gutter10;
+
+    &.active {
+      border-radius: $border-radius-normal;
+      border: 1px solid $blue;
+      background-color: $blueSubtle;
+    }
+
+    &:first-child {
+      margin-top: $gutter10;
+    }
+  }
+
+  .divider {
+    text-align: center;
+    width: 80%;
+    height: 1px;
+    border: 1px dashed $stroke;
+    margin: $gutter24 auto $gutter;
+  }
+
+  .chip {
+    @include element-position(absolute, 0, 0, unset, unset);
+    transform: translateY(50%);
+    pointer-events: none;
+    color: $orange;
+    background-color: $orangeSubtle;
+    padding: $gutter1_4 $gutter1_2;
+    border: 1px solid $orange;
+    font-size: $font-size-xxs;
+    width: max-content;
+    margin: 0 auto $gutter;
+    border-radius: $border-radius-pill;
+  }
+
+  &.show {
+    left: 0;
+    width: 85vw;
+  }
+}
+
+.backdrop {
+  @include sudo-fill(fixed, 0, 0, 0, 0);
+  background-color: transparentize($color: $black, $amount: 0.5);
+  z-index: 101;
+}
+
+@media screen and (min-width: 768px ){
+
+  .hamburger {
+    display: none
+  }
+  .backdrop {
+    display: none;
+  }
+  .sidebar {
+    @include element-position(fixed, 0, unset, 0, 0);
+    width: 10%;
+    .nav-link {
+      flex-direction: column;
+      justify-content: center;
+      padding: $gutter24 $gutter10;
+      gap: 0;
+    }
+    .chip {
+      position: static;
+      transform: none;
+    }
+    .mweb-title {
+      display: none;
+    }
+  }
+}

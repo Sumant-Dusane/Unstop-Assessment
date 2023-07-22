@@ -1,0 +1,92 @@
+@import "../../../assets/styles/variables";
+
+@keyframes expand {
+  from {transform: translateY(-100px); opacity: 0;z-index: -1;}
+  to{transform: none; opacity: 1;z-index: 0;}
+}
+
+.my-assessment {
+  background-color: $white;
+  border-radius: $border-radius-medium;
+
+  .navbar {
+    display: flex;
+    align-items: baseline;
+    flex-direction: column;
+    justify-content: flex-start;
+    border-bottom: 1px solid $stroke;
+    padding-top: $gutter24;
+
+    .h2 {
+      font-size: $font-size-base;
+      padding-left: $gutter4x;
+      font-weight: $font-weight500;
+    }
+
+    .divider {
+      display: none;
+      min-height: 45px;
+      width: 1px;
+      border-radius: $border-radius-normal;
+      border: 1px solid $stroke;
+      margin: 0 $gutter20;
+    }
+
+    ul {
+      white-space: nowrap;
+      overflow-x: auto;
+      width: 100%;
+
+      li {
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+      }
+
+      a {
+        display: block;
+        padding: $gutter24 $gutter2x;
+        border-bottom: 2px solid transparent;
+
+        &.active, &:hover {
+          border-color: $blue;
+        }
+      }
+    }
+  }
+
+  .wrapper {
+    position: relative;
+    animation: expand .4s;
+    &:not(.show) {
+      display: none;
+    }
+    &.show {
+      display: block;
+    }
+  }
+}
+
+@media screen and (min-width: 768px){
+  .my-assessment {
+    .navbar {
+      flex-direction: row;
+      align-items: center;
+      padding: 0 $gutter20;
+
+      .h2 {
+        padding: 0;
+        font-size: $font-size-sm;
+        font-weight: $font-weight700;
+      }
+
+      .divider {
+        display: block;
+      }
+
+      ul li a {
+        border-width: 3px;
+      }
+    }
+  }
+}

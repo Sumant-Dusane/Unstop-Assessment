@@ -1,0 +1,385 @@
+@import "../../../assets/styles/variables";
+@import "../../../assets/styles/sudo";
+
+.assessment-attempted {
+  .assessment-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: $gutter;
+    .icon {
+      display: none;
+      align-items: center;
+      gap: $gutter10;
+    }
+  }
+
+  .assessment-cards {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    gap: $gutter2x;
+
+    .create-card {
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: $gutter10;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      border-style: dashed;
+      background-color: $body-bg;
+      padding: $gutter2x;
+
+      img {
+        border-radius: $border-radius-rounded;
+        padding: $gutter10;
+        background-color: $white;
+      }
+    }
+
+    .card {
+      &__header {
+        position: relative;
+        .menu {
+          position: relative;
+          pointer-events: all;
+          float: right;
+          padding: 5px 7px;
+          border-radius: $border-radius-rounded;
+
+          &:focus-within, &:focus-visible, &:hover {
+            background-color: $blueSubtle;
+
+            & + .dropdown {
+              display: block;
+            }
+          }
+        }
+
+        .menu + .dropdown {
+          display: none;
+          @include element-position(absolute, 32px, 0, unset, unset);
+          background: $body-bg;
+          border-radius: $border-radius-small;
+          z-index: 99;
+          width: max-content;
+          border: 1px solid $stroke;
+          box-shadow: $box-shadow-large;
+          max-height: 135px;
+          overflow-y: auto;
+
+          .dropdown-link {
+            padding: $gutter1_2 $gutter;
+            min-width: 120px;
+          }
+        }
+      }
+
+      &__body {
+        .scheduler {
+          .type {
+            padding-right: $gutter10;
+            margin-right: $gutter10;
+            border-right: 1px solid $stroke;
+          }
+          .date {
+            color: $textColorVariant;
+            position: relative;
+            font-size: $font-size-xs;
+            padding-left: $gutter20;
+
+            &::before {
+              @include sudo-fill(absolute, 0, 0, 0, -73px);
+              background-image: url("../../../assets/icons/calendar.svg");
+              background-position: center;
+              background-repeat: no-repeat;
+              background-size: contain;
+            }
+          }
+        }
+      }
+
+      &__footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .left {
+          display: flex;
+          gap: $gutter10;
+
+          .footer-info {
+            display: flex;
+            flex-direction: column;
+          }
+        }
+
+        .right {
+          display: flex;
+          align-items: flex-end;
+          gap: $gutter10;
+
+          .users {
+            display: flex;
+            align-items: center;
+            a {
+              position: relative;
+              display: block;
+
+              &:not(:first-child) {
+                margin-left: -#{$gutter};
+              }
+            }
+
+            .user-link:hover .tooltip {
+              display: block;
+              opacity: 1;
+            }
+
+            .tooltip {
+              @include element-position(absolute, unset, 0, 90%, unset);
+              display: none;
+              bottom: 122%;
+              background: $body-bg;
+              color: $textColor;
+              padding: $gutter1_2;
+              border-radius: $border-radius-normal;
+              font-size: $font-size-xxs;
+              width: max-content;
+              border: 1px solid $textColor;
+              max-width: 100px;
+              max-height: 140px;
+              overflow-y: auto;
+            }
+
+            .more-users span{
+              position: relative;
+              margin-left: $gutter1_4;
+            }
+          }
+
+          .link {
+            background-image: url("../../../assets/icons/link.svg");
+            background-position: 5px;
+            background-size: 20px;
+            background-repeat: no-repeat;
+            padding-left: $gutter24;
+            background-blend-mode: exclusion;
+          }
+
+          a img {
+            width: 30px;
+            height: 30px;
+            margin-bottom: -3px;
+          }
+        }
+      }
+    }
+  }
+
+  .btn-sticky {
+    display: none;
+  }
+}
+
+.modal {
+  &-header {
+    .btn-close {
+      position: relative;
+      height: 30px;
+      width: 30px;
+      background: url('../../../assets/icons/close-web.svg');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+    }
+  }
+  &-body {
+    padding: $gutter20 $gutter2x;
+    .form {
+      display: flex;
+      flex-direction: column;
+      gap: $gutter10;
+
+      label {
+        font-size: $font-size-base;
+
+        &:not(:first-child) {
+          margin-top: $gutter10;
+        }
+      }
+
+      .skills {
+        border: 1px solid $stroke;
+        border-radius: $border-radius-normal;
+        overflow: hidden;
+
+        &__selected {
+          display: flex;
+          flex-wrap: wrap;
+          gap: $gutter1_2;
+          padding: $gutter1_2;
+          max-height: 120px;
+          overflow-y: auto;
+          overflow-x: hidden;
+        }
+
+        input {
+          width: 100%;
+          border-left: 0;
+          border-right: 0;
+          border-bottom: 0;
+        }
+      }
+    }
+  }
+  &-footer {
+    padding: $gutter20 $gutter2x;
+    box-shadow: $box-shadow-large;
+
+    input[type="submit"] {
+      cursor: pointer;
+      color: $white;
+      background-color: $blue;
+      width: 100%;
+      border-radius: $border-radius-normal;
+      transition: $transition-in-out;
+
+      &:hover {
+        background-color: $textColor;
+      }
+    }
+  }
+}
+
+
+@media screen and (max-width: 768px) {
+  .assessment-attempted {
+
+    .assessment-header {
+      .title {
+        font-size: $font-size-base;
+      }
+      .icon {
+        display: flex;
+        .btn-img {
+          padding: $gutter1_2 $gutter10;
+          border-radius: $border-radius-rounded;
+          border: 1px $blue;
+          &.active {
+            background-color: $blueSubtle;
+            img {
+              filter: brightness(1.75);
+            }
+          }
+        }
+
+      }
+    }
+
+    .assessment-cards {
+      gap: $gutter;
+      flex-direction: column;
+
+      .create-card {
+        padding: $gutter20;
+
+        .title {
+          font-size: $font-size-default;
+        }
+
+        p {
+          font-size: $font-size-xs;
+        }
+
+        img {
+          width: 40px;
+          height: 40px;
+          padding: $gutter1_2;
+        }
+      }
+
+      .card {
+        &__body {
+          display: grid;
+          grid-template-areas: "icon title""icon scheduler";
+          grid-template-columns: 60px 1fr;
+
+          .icon {
+            grid-area: icon;
+          }
+
+          .title {
+            grid-area: title;
+          }
+
+          .scheduler {
+            grid-area: scheduler;
+          }
+        }
+
+        &__footer {
+          margin-top: $gutter10;
+          padding-top: $gutter10;
+          .left {
+            .footer-info {
+              &__value {
+                font-size: $font-size-xxs;
+              }
+              &__label {
+                font-size: $font-size-xs;
+              }
+            }
+          }
+          .right {
+            .link {
+              background-size: 16px;
+              padding-left: $gutter24;
+              font-size: $font-size-xs;
+            }
+          }
+        }
+      }
+    }
+
+    .btn-sticky {
+      @include element-position(fixed, unset, 0, 0, unset);
+      margin: $gutter;
+      background: $blue;
+      border-radius: $border-radius-button;
+      padding: $gutter $gutter $gutter12;
+      z-index: 100;
+
+      img {
+        filter: brightness(100);
+      }
+    }
+  }
+  .modal {
+    &-header {
+      @include element-position(sticky, 0, 0, unset, 0);
+
+      h2 {
+        font-size: $font-size-default;
+      }
+      .btn-close {
+        height: 40px;
+        width: 40px;
+        background: url('../../../assets/icons/close.svg');
+      }
+    }
+    &-body {
+      padding: $gutter;
+      background: $white;
+      overflow: auto;
+    }
+    &-footer {
+      @include element-position(sticky, unset, 0, 0, 0);
+      background: $white;
+    }
+  }
+}

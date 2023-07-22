@@ -1,0 +1,20 @@
+<div class="my-assessment">
+  <nav class="navbar">
+    <div class="h2">Assessment</div>
+    <div class="divider"></div>
+    <ul>
+      <li>
+        <a class="nav-link active" href="#">My Assessments</a>
+      </li>
+      <li>
+        <a class="nav-link" href="#">Unstop Assessment</a>
+      </li>
+    </ul>
+  </nav>
+  <div class="wrapper show" [ngClass]="{'show': showOverview}">
+    <app-assessment-overview></app-assessment-overview>
+  </div>
+  <div class="wrapper show">
+    <app-assessment-attempted (assessmentOverviewHandler)="handleOverviewVisibility($event)"></app-assessment-attempted>
+  </div>
+</div>

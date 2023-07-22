@@ -1,0 +1,119 @@
+@media screen and (min-width: 768px){
+  .container {
+    position: relative;
+    margin-left: 10%;
+    margin-top: $gutter;
+    padding: $gutter $gutter2x;
+  }
+
+}
+
+.modal-open {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.card {
+  width: 100%;
+  padding: $gutter;
+  border-radius: $border-radius-medium;
+  border: 1px solid $stroke;
+  background-color: $white;
+
+  &__footer {
+    margin-top: $gutter;
+    padding-top: $gutter;
+    border-top: 1px dashed $stroke;
+  }
+}
+
+.title {
+  font-size: $font-size-s;
+}
+
+
+.btn {
+  cursor: pointer;
+  border: 0;
+  outline: 0;
+  background: none;
+
+  &:focus, &:focus-visible {
+    outline: 0;
+  }
+}
+
+.btn-close {
+  position: relative;
+  height: 30px;
+  width: 30px;
+  background: url('../icons/close-web.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.btn-img {
+  position: relative;
+  img {
+    width: 20px;
+    height: 20px;
+    object-fit: cover;
+  }
+}
+
+.btn-outline-primary {
+  overflow: hidden;
+  z-index: 9;
+  position: relative;
+  color: $textColor;
+  padding: $gutter1_4 $gutter1_2;
+  border: 1px solid $textColor;
+  border-radius: $border-radius-button;
+}
+
+.waves-primary {
+  &::before {
+    @include sudo-fill(absolute, 0, unset, unset, 0);
+    height: 100%;
+    width: 0;
+    z-index: -1;
+    background-color: $textColor;
+    transition: $transition-long;
+  }
+
+  &:hover {
+    color: $white;
+
+    &::before {
+      width: 100%;
+      transition: $transition-long;
+    }
+  }
+}
+
+
+.wrapper {
+  padding: $gutter20 $gutter1_2;
+
+  @media screen and (min-width: 768px){
+    padding: $gutter24;
+  }
+}
+
+.chips {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $gutter1_4;
+  font-size: $font-size-xs;
+  padding: $gutter1_2;
+  background: $blueSubtle;
+  width: max-content;
+  border-radius: $border-radius-pill;
+
+  .btn-close {
+    width: 1em;
+    height: 1em;
+  }
+}
