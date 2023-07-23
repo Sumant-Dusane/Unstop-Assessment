@@ -82,7 +82,7 @@
 
 
 <div class="modal slide-down" id="new-assessment" [ngClass]="{'show': createNewAssessment}">
-  <div class="modal-backdrop"></div>
+  <div class="modal-backdrop" (click)="closeModal()"></div>
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
