@@ -15,66 +15,76 @@
       <p>From here you can add questions of multiple types like MCQs, subjective (text or paragraph)!</p>
     </div>
 
-    <div class="card" *ngFor="let item of [1,2]">
-      <div class="card__header">
-        <button class="btn btn-img menu"><img src="../../../assets/icons/dot_menu.svg"></button>
-        <ul class="dropdown">
-          <li *ngFor="let item of [1,2,3,4,5]">
-            <button class="btn dropdown-link">Option {{item}}</button>
-          </li>
-        </ul>
-      </div>
-      <div class="card__body">
-        <img class="icon" src="../../../assets/icons/briefcase.svg">
-        <div class="title">Maths Assessment</div>
-        <div class="scheduler">
-          <span class="type">Job</span>
-          <span class="date">20 Apr 2023</span>
+    <ng-container *ngIf="assessments.length">
+      <div class="card" *ngFor="let item of assessments">
+        <div class="card__header">
+          <button class="btn btn-img menu"><img src="../../../assets/icons/dot_menu.svg"></button>
+          <ul class="dropdown">
+            <li *ngFor="let item of [1,2,3,4,5]">
+              <button class="btn dropdown-link">Option {{item}}</button>
+            </li>
+          </ul>
         </div>
-      </div>
-      <div class="card__footer">
-        <div class="left">
-          <div class="footer-info">
-            <span class="footer-info__value">00</span>
-            <span class="footer-info__label">Duration</span>
-          </div>
-          <div class="footer-info">
-            <span class="footer-info__value">00</span>
-            <span class="footer-info__label">Questions</span>
+        <div class="card__body">
+          <img class="icon" src="../../../assets/icons/briefcase.svg">
+          <div class="title">{{item?.name}}</div>
+          <div class="scheduler">
+            <span class="type">Job</span>
+            <span class="date">{{'20 Apr 2023'}}</span>
           </div>
         </div>
-        <div class="right">
-          <button class="btn btn-outline-primary waves-primary link">Share</button>
-          <div class="users">
-            <a class="user-link" href="#"><img src="../../../assets/icons/user_dp.svg" alt="User Name">
-              <div class="tooltip">
-                User Name1
-              </div>
-            </a>
-            <a class="user-link" href="#"><img src="../../../assets/icons/user_dp.svg" alt="User Name">
-              <div class="tooltip">
-                User Name2
-              </div>
-            </a>
-            <a class="user-link" href="#"><img src="../../../assets/icons/user_dp.svg" alt="User Name">
-              <div class="tooltip">
-                User Name3
-              </div>
-            </a>
-            <div class="more-users">
-              <span class="user-link">
-                +324
+        <div class="card__footer">
+          <div class="left">
+            <div class="footer-info">
+              <span class="footer-info__value">{{item?.duration}}</span>
+              <span class="footer-info__label">Duration</span>
+            </div>
+            <div class="footer-info">
+              <span class="footer-info__value">{{00}}</span>
+              <span class="footer-info__label">Questions</span>
+            </div>
+          </div>
+          <div class="right">
+            <button class="btn btn-outline-primary waves-primary link">Share</button>
+            <div class="users">
+              <a class="user-link" href="#"><img src="../../../assets/icons/user_dp.svg" alt="User Name">
                 <div class="tooltip">
-                  <ng-container *ngFor="let item of [1,2,3,4,5,6,7,8,9,10]; let index = index">
-                    User Name{{item}},
-                  </ng-container>
+                  User Name1
                 </div>
-              </span>
+              </a>
+              <a class="user-link" href="#"><img src="../../../assets/icons/user_dp.svg" alt="User Name">
+                <div class="tooltip">
+                  User Name2
+                </div>
+              </a>
+              <a class="user-link" href="#"><img src="../../../assets/icons/user_dp.svg" alt="User Name">
+                <div class="tooltip">
+                  User Name3
+                </div>
+              </a>
+              <div class="more-users">
+                <span class="user-link">
+                  +324
+                  <div class="tooltip">
+                    <ng-container *ngFor="let item of [1,2,3,4,5,6,7,8,9,10]; let index = index">
+                      User Name{{item}},
+                    </ng-container>
+                  </div>
+                </span>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </ng-container>
+
+    <ng-container *ngIf="!assessments.length">
+      <div class="card create-card no-assessment">
+        <img src="../../../assets/icons/quiz.svg" alt="Create New Assessment">
+        <div class="title">No Assessment Available</div>
+      </div>
+    </ng-container>
+
   </div>
 
   <button class="btn btn-sticky btn-img" (click)="openModal()"><img src="../../../assets/icons/plus_sign.svg" alt="New Assessment"></button>
@@ -84,48 +94,48 @@
 <div class="modal slide-down" id="new-assessment" [ngClass]="{'show': createNewAssessment}">
   <div class="modal-backdrop" (click)="closeModal()"></div>
   <div class="modal-dialog">
-    <div class="modal-content">
+    <form class="modal-content form" [formGroup]="formData">
       <div class="modal-header">
         <h2>Create new assessment</h2>
         <button class="btn btn-close" (click)="closeModal()"></button>
       </div>
       <div class="modal-body assessment-form">
         <div class="form">
-          <label for="name">Name of assessment</label>
-          <input type="text" name="name" id="name" placeholder="Type Here">
-          <label for="purpose">Purpose of the test is</label>
-          <select name="purpose" id="purpose">
-            <option value="purpose1">Purpose 1</option>
-            <option value="purpose2">Purpose 2</option>
-            <option value="purpose3">Purpose 3</option>
-            <option value="purpose4">Purpose 4</option>
-            <option value="purpose5">Purpose 5</option>
-          </select>
-          <label for="purpose">Description</label>
-          <select name="description" id="description">
-            <option value="description1">Description 1</option>
-            <option value="description2">Description 2</option>
-            <option value="description3">Description 3</option>
-            <option value="description4">Description 4</option>
-            <option value="description5">Description 5</option>
-          </select>
-          <label for="skills">Skills</label>
-          <div class="skills">
-            <div class="skills__selected">
-              <div class="chips" *ngFor="let item of skills; let index = index">
-                {{item}}
-                <button class="btn btn-close" (click)="removeSkill(index)"></button>
+            <label for="name">Name of assessment</label>
+            <input type="text" name="name" id="name" placeholder="Type Here" formControlName="name">
+            <label for="purpose">Purpose of the test is</label>
+            <select name="purpose" id="purpose" formControlName="purpose">
+              <option value="purpose1">Purpose 1</option>
+              <option value="purpose2">Purpose 2</option>
+              <option value="purpose3">Purpose 3</option>
+              <option value="purpose4">Purpose 4</option>
+              <option value="purpose5">Purpose 5</option>
+            </select>
+            <label for="purpose">Description</label>
+            <select name="description" id="description" formControlName="desc">
+              <option value="description1">Description 1</option>
+              <option value="description2">Description 2</option>
+              <option value="description3">Description 3</option>
+              <option value="description4">Description 4</option>
+              <option value="description5">Description 5</option>
+            </select>
+            <label for="skills">Skills</label>
+            <div class="skills">
+              <div class="skills__selected">
+                <div class="chips" *ngFor="let item of formData.get('skills')?.value; let index = index">
+                  {{item}}
+                  <button class="btn btn-close" (click)="removeSkill(index)"></button>
+                </div>
               </div>
+              <input type="text" name="skills_search" id="skills_search" placeholder="Type here" (change)="addSkills($event)">
             </div>
-            <input type="text" name="skills_search" id="skills_search" placeholder="Type here" (change)="addSkills($event)">
-          </div>
-          <label for="duration">Duration of assessment</label>
-          <input type="text" name="duration" id="duration" placeholder="HH:MM:SS">
+            <label for="duration">Duration of assessment</label>
+            <input type="text" name="duration" id="duration" placeholder="HH:MM:SS" formControlName="duration">
         </div>
       </div>
       <div class="modal-footer">
-        <input type="submit" value="Submit" class="waves-primary">
+        <input type="submit" value="Submit" class="waves-primary" (click)="addAssessment()">
       </div>
-    </div>
+    </form>
   </div>
 </div>
