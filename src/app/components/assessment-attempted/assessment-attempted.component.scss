@@ -259,6 +259,11 @@
       &:hover {
         background-color: $textColor;
       }
+
+      &:disabled {
+        cursor: not-allowed;
+        background-color: $textColorVariant;
+      }
     }
   }
 }

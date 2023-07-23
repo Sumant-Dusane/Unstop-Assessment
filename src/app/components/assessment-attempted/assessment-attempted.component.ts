@@ -27,15 +27,16 @@ export class AssessmentAttemptedComponent{
     this.store.select(assessmentSelector).subscribe((assessment: Assessment[]) => {
       let response = assessment;
       this.setData(response);
-    })
+    });
 
+    const timePattern = /^(\d{1,2}):(\d{1,2}):(\d{1,2})$/;
     this.formData = this._fb.group({
       id: this._fb.control(Date.now().toString()),
-      name: this._fb.control('', [Validators.required, Validators.maxLength(2)]),
+      name: this._fb.control('', [Validators.required, Validators.minLength(2)]),
       purpose: this._fb.control('', [Validators.required]),
       desc: this._fb.control('', [Validators.required]),
-      skills: this._fb.array(['UI/UX and Design', 'Web Developement', 'UI/UX and Design', 'Web Developement', 'No of Question'], [Validators.maxLength(1)]),
-      duration: this._fb.control('', [Validators.required])
+      skills: this._fb.array(['UI/UX and Design', 'Web Developement', 'UI/UX and Design', 'Web Developement', 'No of Question'], Validators.minLength(1)),
+      duration: this._fb.control('', [Validators.required, Validators.pattern(timePattern)])
     });
   }
 
@@ -70,12 +71,15 @@ export class AssessmentAttemptedComponent{
   }
 
   addAssessment() {
-    const formValue = this.formData.value;
-    const keys = Object.keys(formValue);
-    const assessment = keys.reduce((obj: any, key: any) => {
-      obj[key] = formValue[key];
-      return obj;
-    }, {});
-    this.store.dispatch(addAssessment({assessment: assessment}))
+    if(this.formData.valid) {
+      const formValue = this.formData.value;
+      const keys = Object.keys(formValue);
+      const assessment = keys.reduce((obj: any, key: any) => {
+        obj[key] = formValue[key];
+        return obj;
+      }, {});
+      this.store.dispatch(addAssessment({assessment: assessment}));
+      this.closeModal();
+    }
   }
 }
