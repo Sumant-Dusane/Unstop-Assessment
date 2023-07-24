@@ -8,7 +8,32 @@ interface AppState {
 }
 
 const initialState: AppState = {
-  assessment: []
+  assessment: [
+    {
+      id: '69',
+      name: 'Test2',
+      purpose: 'Purpose1',
+      description: 'Desc1',
+      skills: ['Angular', 'UX', 'UI'],
+      duration: '10:20:30',
+    },
+    {
+      id: '79',
+      name: 'Test1',
+      purpose: 'Purpose1',
+      description: 'Desc1',
+      skills: ['Angular', 'UX', 'UI'],
+      duration: '10:20:30',
+    },
+    {
+      id: '68',
+      name: 'Test3',
+      purpose: 'Purpose1',
+      description: 'Desc1',
+      skills: ['Angular', 'UX', 'UI'],
+      duration: '10:20:30',
+    }
+  ]
 }
 
 const appFeatureSelector = createFeatureSelector<AppState>('app-state');
@@ -24,6 +49,24 @@ export const appReducer = createReducer (
     return {
       ...state,
       assessment: [...state?.assessment, action?.assessment]
+    }
+  }),
+  on(appAction.deleteAssessment, (state, action): AppState => {
+    const assessments = [...state.assessment];
+    assessments.splice(assessments.indexOf(action.assessment), 1);
+    console.log(assessments);
+    return {
+      ...state,
+      assessment: assessments
+    }
+  }),
+  on(appAction.updateAssessment, (state, action): AppState => {
+    var assessment = [...state.assessment];
+    const newAssessment = assessment.map(obj => (obj?.id == action.assessment.id) ? action.assessment : obj)
+
+    return{
+      ...state,
+      assessment: newAssessment
     }
   })
 );

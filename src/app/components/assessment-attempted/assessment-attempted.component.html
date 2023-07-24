@@ -18,12 +18,17 @@
     <ng-container *ngIf="assessments.length">
       <div class="card" *ngFor="let item of assessments">
         <div class="card__header">
-          <button class="btn btn-img menu"><img src="../../../assets/icons/dot_menu.svg"></button>
-          <ul class="dropdown">
-            <li *ngFor="let item of [1,2,3,4,5]">
-              <button class="btn dropdown-link">Option {{item}}</button>
-            </li>
-          </ul>
+          <button class="btn btn-img menu">
+            <img src="../../../assets/icons/dot_menu.svg">
+            <ul class="dropdown">
+              <li>
+                <button type="button" class="btn dropdown-link dropdown-link" tabindex="1" (click)="updateAssessment(item)">Update</button>
+              </li>
+              <li>
+                <button type="button" class="btn dropdown-link dropdown-link-danger" tabindex="1" (click)="deleteAssessment(item)">Delete</button>
+              </li>
+            </ul>
+          </button>
         </div>
         <div class="card__body">
           <img class="icon" src="../../../assets/icons/briefcase.svg">

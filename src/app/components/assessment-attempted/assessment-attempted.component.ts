@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CommonService } from 'src/app/service/common-service.service';
 import { Store } from '@ngrx/store';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { addAssessment } from 'src/app/app-state/app.action';
+import { addAssessment, deleteAssessment, updateAssessment } from 'src/app/app-state/app.action';
 import { Assessment } from 'src/app/app-state/app.state';
 import { assessmentSelector } from 'src/app/app-state/app.reducer';
 
@@ -78,9 +78,24 @@ export class AssessmentAttemptedComponent{
         obj[key] = formValue[key];
         return obj;
       }, {});
-      this.store.dispatch(addAssessment({assessment: assessment}));
+      if(this.assessments.indexOf(assessment) == -1) {
+        this.store.dispatch(updateAssessment({assessment: assessment}));
+      } else {
+        this.store.dispatch(addAssessment({assessment: assessment}));
+      }
       this.closeModal();
       this.formData.reset();
     }
+  }
+
+  updateAssessment(assessment: Assessment) {
+    this.formData.patchValue(assessment);
+    console.log(this.formData.value);
+
+    this.openModal();
+  }
+
+  deleteAssessment(assessment: Assessment) {
+    this.store.dispatch(deleteAssessment({assessment: assessment}))
   }
 }

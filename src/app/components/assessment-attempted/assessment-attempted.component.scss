@@ -59,30 +59,45 @@
           padding: 5px 7px;
           border-radius: $border-radius-rounded;
 
-          &:focus-within, &:focus-visible, &:hover {
-            background-color: $blueSubtle;
+          .dropdown {
+            display: none;
+            @include element-position(absolute, 32px, 0, unset, unset);
+            background: $body-bg;
+            border-radius: $border-radius-small;
+            z-index: 99;
+            width: max-content;
+            border: 1px solid $stroke;
+            box-shadow: $box-shadow-large;
+            max-height: 135px;
+            overflow-y: auto;
 
-            & + .dropdown {
-              display: block;
+            .dropdown-link {
+              display: inline-block;
+              padding: $gutter1_2 $gutter;
+              min-width: 120px;
+              z-index: 50;
+              position: relative;
+
+              &:hover {
+                background-color: $blueSubtle;
+              }
+
+              &-danger {
+                color: $orange;
+
+                &:hover {
+                  background-color: $orangeSubtle;
+                }
+              }
             }
           }
-        }
 
-        .menu + .dropdown {
-          display: none;
-          @include element-position(absolute, 32px, 0, unset, unset);
-          background: $body-bg;
-          border-radius: $border-radius-small;
-          z-index: 99;
-          width: max-content;
-          border: 1px solid $stroke;
-          box-shadow: $box-shadow-large;
-          max-height: 135px;
-          overflow-y: auto;
+          &:focus-within, &:focus-visible, &:focus, &:hover {
+            background-color: $blueSubtle;
 
-          .dropdown-link {
-            padding: $gutter1_2 $gutter;
-            min-width: 120px;
+            .dropdown {
+              display: block;
+            }
           }
         }
       }
