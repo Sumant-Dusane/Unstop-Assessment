@@ -27,7 +27,7 @@
         </div>
         <div class="card__body">
           <img class="icon" src="../../../assets/icons/briefcase.svg">
-          <div class="title">{{item?.name}}</div>
+          <div title="{{item?.name}}" class="title">{{item?.name}}</div>
           <div class="scheduler">
             <span class="type">Job</span>
             <span class="date">{{'20 Apr 2023'}}</span>
@@ -47,17 +47,17 @@
           <div class="right">
             <button class="btn btn-outline-primary waves-primary link">Share</button>
             <div class="users">
-              <a class="user-link" href="#"><img src="../../../assets/icons/user_dp.svg" alt="User Name">
+              <a class="user-link" href="javascript:void(0)"><img src="../../../assets/icons/user_dp.svg" alt="User Name">
                 <div class="tooltip">
                   User Name1
                 </div>
               </a>
-              <a class="user-link" href="#"><img src="../../../assets/icons/user_dp.svg" alt="User Name">
+              <a class="user-link" href="javascript:void(0)"><img src="../../../assets/icons/user_dp.svg" alt="User Name">
                 <div class="tooltip">
                   User Name2
                 </div>
               </a>
-              <a class="user-link" href="#"><img src="../../../assets/icons/user_dp.svg" alt="User Name">
+              <a class="user-link" href="javascript:void(0)"><img src="../../../assets/icons/user_dp.svg" alt="User Name">
                 <div class="tooltip">
                   User Name3
                 </div>
@@ -97,7 +97,7 @@
     <form class="modal-content form" [formGroup]="formData">
       <div class="modal-header">
         <h2>Create new assessment</h2>
-        <button class="btn btn-close" (click)="closeModal()"></button>
+        <button type="button" class="btn btn-close" (click)="closeModal()"></button>
       </div>
       <div class="modal-body assessment-form">
         <div class="form">
@@ -132,10 +132,12 @@
             <label for="skills">Skills</label>
             <div class="skills">
               <div class="skills__selected">
-                <div class="chips" *ngFor="let item of formData.get('skills')?.value; let index = index">
-                  {{item}}
-                  <button class="btn btn-close" (click)="removeSkill(index)"></button>
-                </div>
+                <ng-container *ngFor="let item of formData.get('skills')?.value; let index = index">
+                  <div class="chips" *ngIf="item">
+                    {{item}}
+                    <button type="button" class="btn btn-close" (click)="removeSkill(index)"></button>
+                  </div>
+                </ng-container>
               </div>
               <input type="text" name="skills_search" id="skills_search" placeholder="Type here" (change)="addSkills($event)">
             </div>
@@ -151,7 +153,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <input type="submit" value="Submit" class="waves-primary" (click)="addAssessment()" [disabled]="formData.invalid">
+        <button type="button" class="btn waves-primary btn-submit" (click)="addAssessment()" [disabled]="formData.invalid">Submit</button>
       </div>
     </form>
   </div>

@@ -12,7 +12,7 @@ import { assessmentSelector } from 'src/app/app-state/app.reducer';
   styleUrls: ['./assessment-attempted.component.scss']
 })
 export class AssessmentAttemptedComponent{
-  createNewAssessment: boolean = false;
+  createNewAssessment: boolean;
   showAssessmentOverview: boolean;
   assessments: any[] = [];
   formData: FormGroup;
@@ -80,6 +80,7 @@ export class AssessmentAttemptedComponent{
       }, {});
       this.store.dispatch(addAssessment({assessment: assessment}));
       this.closeModal();
+      this.formData.reset();
     }
   }
 }

@@ -1,5 +1,6 @@
 @import "../../../assets/styles/variables";
 @import "../../../assets/styles/sudo";
+@import "../../../assets/styles/text-functions";
 
 .assessment-attempted {
   .assessment-header {
@@ -87,6 +88,9 @@
       }
 
       &__body {
+        .title {
+          @include line-clamp(2);
+        }
         .scheduler {
           .type {
             padding-right: $gutter10;
@@ -220,6 +224,10 @@
         }
       }
 
+      .form-error {
+        color: $orange;
+      }
+
       .skills {
         border: 1px solid $stroke;
         border-radius: $border-radius-normal;
@@ -248,10 +256,11 @@
     padding: $gutter20 $gutter2x;
     box-shadow: $box-shadow-large;
 
-    input[type="submit"] {
+    .btn-submit {
       cursor: pointer;
       color: $white;
       background-color: $blue;
+      padding: $gutter;
       width: 100%;
       border-radius: $border-radius-normal;
       transition: $transition-in-out;
@@ -328,6 +337,7 @@
 
           .title {
             grid-area: title;
+            -webkit-line-clamp: 1;
           }
 
           .scheduler {
