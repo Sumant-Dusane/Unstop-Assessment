@@ -2,7 +2,7 @@ export interface Assessment {
   id: string,
   name: string,
   purpose: string,
-  description: string,
+  desc: string,
   skills: string[],
   duration: string,
 }

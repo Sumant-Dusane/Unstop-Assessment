@@ -114,22 +114,22 @@
             </div>
             <label for="purpose">Purpose of the test is</label>
             <select name="purpose" id="purpose" formControlName="purpose">
-              <option value="purpose1">Purpose 1</option>
-              <option value="purpose2">Purpose 2</option>
-              <option value="purpose3">Purpose 3</option>
-              <option value="purpose4">Purpose 4</option>
-              <option value="purpose5">Purpose 5</option>
+              <option
+                [selected]="formData.get('purpose')?.value == 'Purpose'+option"
+                *ngFor="let option of [1,2,3,4,5]">
+                  Purpose {{option}}
+              </option>
             </select>
             <div class="form-error" *ngIf="formData.get('purpose')?.invalid && (formData.get('purpose')?.dirty || formData.get('purpose')?.touched)">
               <small *ngIf="formData.get('purpose')?.errors?.['required']">please select the purpose</small>
             </div>
             <label for="purpose">Description</label>
             <select name="description" id="description" formControlName="desc">
-              <option value="description1">Description 1</option>
-              <option value="description2">Description 2</option>
-              <option value="description3">Description 3</option>
-              <option value="description4">Description 4</option>
-              <option value="description5">Description 5</option>
+              <option
+                [selected]="formData.get('desc')?.value == 'Desc'+option"
+                *ngFor="let option of [1,2,3,4,5]">
+                  Description {{option}}
+              </option>
             </select>
             <div class="form-error" *ngIf="formData.get('desc')?.invalid && (formData.get('desc')?.dirty || formData.get('desc')?.touched)">
               <small *ngIf="formData.get('desc')?.errors?.['required']">please select the purpose</small>
