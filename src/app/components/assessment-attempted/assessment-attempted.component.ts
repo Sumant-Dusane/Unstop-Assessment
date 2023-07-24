@@ -90,8 +90,6 @@ export class AssessmentAttemptedComponent{
 
   updateAssessment(assessment: Assessment) {
     this.formData.patchValue(assessment);
-    console.log(this.formData.value);
-
     this.openModal();
   }
 
