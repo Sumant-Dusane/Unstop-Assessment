@@ -78,10 +78,12 @@ export class AssessmentAttemptedComponent{
         obj[key] = formValue[key];
         return obj;
       }, {});
-      if(this.assessments.indexOf(assessment) == -1) {
-        this.store.dispatch(updateAssessment({assessment: assessment}));
+      let addStatus: boolean = true;
+      this.assessments.map(obj => (obj?.id == assessment?.id ? addStatus = false : addStatus));
+      if(addStatus) {
+        this.store.dispatch(addAssessment({assessment: assessment}))
       } else {
-        this.store.dispatch(addAssessment({assessment: assessment}));
+        this.store.dispatch(updateAssessment({assessment: assessment}));
       }
       this.closeModal();
       this.formData.reset();
