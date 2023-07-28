@@ -385,6 +385,7 @@
     }
 
     .btn-sticky {
+      display: block;
       @include element-position(fixed, unset, 0, 0, unset);
       margin: $gutter;
       background: $blue;
